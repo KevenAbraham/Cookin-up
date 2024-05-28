@@ -1,14 +1,14 @@
 <script lang="ts">
+import { SelecionarIngredientes } from './SelecionarIngredientes';
 
 export default {
     data() {
         return {
             ingredientes: ['Alho', 'Manteiga', 'Orégano']
         }
-    }
-
+    },
+    compoenents: { SelecionarIngredientes }
 }
-
 </script>
 
 <template>
@@ -18,12 +18,19 @@ export default {
                 Sua lista:
             </span>
 
-            <ul class="ingredientes-sua-lista">
-                <li v-for="ingrediente in ingredientes" class="ingrediente">
+            <ul v-if="ingredientes.length" class="ingredientes-sua-lista">
+                <li v-for="ingrediente in ingredientes" :key="ingrediente" class="ingrediente">
                     {{ ingrediente }}
                 </li>
             </ul>
+
+            <p v-else class="paragrafo lista-vazia">
+                <img src="/src/assets/imagens/icones/lista-vazia.svg" alt="icone de pesquisa">
+                Sua lista está vazia, selecione ingrediontes para adicionar.
+            </p>
         </section>
+
+        <SelecionarIngredientes />
     </main>
 </template>
 
@@ -33,7 +40,6 @@ export default {
     border-radius: 3.75rem 3.75rem 0rem 0rem;
     background: var(--creme, #FFFAF3);
     color: var(--cinza, #444);
-
     display: flex;
     flex-direction: column;
     align-items: center;
