@@ -1,5 +1,5 @@
 <script lang="ts">
-import { SelecionarIngredientes } from './SelecionarIngredientes';
+import SelecionarIngredientes from './SelecionarIngredientes.vue'; //ta dando erro
 
 export default {
     data() {
@@ -7,7 +7,7 @@ export default {
             ingredientes: ['Alho', 'Manteiga', 'Orégano']
         }
     },
-    compoenents: { SelecionarIngredientes }
+    components: { SelecionarIngredientes }
 }
 </script>
 
@@ -26,7 +26,7 @@ export default {
 
             <p v-else class="paragrafo lista-vazia">
                 <img src="/src/assets/imagens/icones/lista-vazia.svg" alt="icone de pesquisa">
-                Sua lista está vazia, selecione ingrediontes para adicionar.
+                Sua lista está vazia, selecione ingrediontes para iniciar.
             </p>
         </section>
 
