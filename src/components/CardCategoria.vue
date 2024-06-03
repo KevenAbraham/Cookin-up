@@ -2,30 +2,35 @@
 import type ICategoria from '@/interfaces/ICategoria';
 import type { PropType } from 'vue';
 import Tag from './Tag.vue';
+import IngredienteSelecionavel from './IngredienteSelecionavel.vue';
 
 export default {
-    props: {
-        categoria: { type: Object as PropType<ICategoria>, required: true }
-    },
-    components: { Tag }
+  props: {
+    categoria: { type: Object as PropType<ICategoria>, required: true }
+  },
+  components: { Tag, IngredienteSelecionavel },
+  emits: ['adicionarIngrediente', 'removerIngrediente']
 }
 </script>
 
 
 <template>
-    <article class="categoria">
-        <header class="categoria_cabecalho">
-            <img :src="`/imagens/icones/categorias_ingredientes/${categoria.imagem}`" alt="Logo do Cookin' Up" class="categoria_imagem">
+  <article class="categoria">
+    <header class="categoria_cabecalho">
+      <img :src="`/imagens/icones/categorias_ingredientes/${categoria.imagem}`" alt="Logo do Cookin' Up"
+        class="categoria_imagem">
 
-            <h2 class="paragrafo-lg categoria__nome">{{ categoria.nome }}</h2>
-        </header>
+      <h2 class="paragrafo-lg categoria__nome">{{ categoria.nome }}</h2>
+    </header>
 
-        <ul class="categoria__ingredientes">
-            <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
-                <Tag :texto="ingrediente" />
-            </li>
-        </ul>
-    </article>
+    <ul class="categoria__ingredientes">
+      <li v-for="ingrediente in categoria.ingredientes" :key="ingrediente">
+        <IngredienteSelecionavel :ingrediente="ingrediente"
+          @adicionar-ingrediente="$emit('adicionarIngrediente', $event)"
+          @remover-ingrediente="$emit('removerIngrediente', $event)" />
+      </li>
+    </ul>
+  </article>
 </template>
 
 <style scoped>
@@ -66,5 +71,4 @@ export default {
   gap: 0.5rem;
   flex-wrap: wrap;
 }
-
 </style>
